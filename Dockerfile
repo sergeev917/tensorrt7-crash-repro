@@ -35,7 +35,7 @@ RUN [[ "$(sha1sum /w/TensorRT*.tar.gz | cut -d' ' -f1)" != "1f17eb8c0b2f1ea0c7bf
     mv TensorRT*/include/* /w/vendor/include/ && \
     mv TensorRT*/targets/x86_64-linux-gnu/lib/* /w/vendor/lib/ && \
     rm -rf TensorRT*
-RUN wget "https://media.githubusercontent.com/media/onnx/models/8883e49e68de7b43e263d56b9ed156dfa1e03117/vision/object_detection_segmentation/ssd/model/ssd-10.onnx"
+RUN wget "https://media.githubusercontent.com/media/onnx/models/f884b33c3e2371952aad7ea091898f418c830fe5/vision/classification/squeezenet/model/squeezenet1.0-3.onnx"
 COPY main.cc /w/
 RUN g++ -O0 -ggdb3 \
     -o main \
@@ -59,4 +59,4 @@ RUN g++ -O0 -ggdb3 \
     -lrt -ldl -pthread \
     -lcuda \
     -lnvrtc
-ENTRYPOINT ["/w/main", "./ssd-10.onnx"]
+ENTRYPOINT ["/w/main", "./squeezenet1.0-3.onnx"]
